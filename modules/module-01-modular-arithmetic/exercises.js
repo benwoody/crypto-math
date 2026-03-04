@@ -123,7 +123,7 @@ export default {
                 { id: 'p4a', label: '3⁻¹ mod 7 =', placeholder: '?' },
                 { id: 'p4b', label: '5⁻¹ mod 11 =', placeholder: '?' },
                 { id: 'p4c', label: '2⁻¹ mod 13 =', placeholder: '?' },
-                { id: 'p4d', label: '6⁻¹ mod 10 =', placeholder: 'number or "none"' },
+                { id: 'p4d', label: '6⁻¹ mod 10 =', placeholder: 'number or "none"', width: '180px' },
               ],
               validate(vals) {
                 return [

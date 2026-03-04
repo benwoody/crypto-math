@@ -47,8 +47,8 @@ export default {
           inputs: [
             {
               fields: [
-                { id: 'p2a', label: '2^10 closer to:', placeholder: '1000 or 10000' },
-                { id: 'p2b', label: '2^20 closer to:', placeholder: '100000 or 1000000' },
+                { id: 'p2a', label: '2^10 closer to:', placeholder: '1000 or 10000', width: '180px' },
+                { id: 'p2b', label: '2^20 closer to:', placeholder: '100000 or 1000000', width: '200px' },
                 { id: 'p2c', label: '2^256 has ~? digits:', placeholder: '?' },
               ],
               validate(vals) {
@@ -164,7 +164,7 @@ export default {
                 { id: 'p6a', label: 'mod 10, possible results:', placeholder: 'e.g. 0-?' },
                 { id: 'p6b', label: 'mod 256, possible results:', placeholder: 'e.g. 0-?' },
                 { id: 'p6c', label: 'mod 2, possible results:', placeholder: 'e.g. 0-?' },
-                { id: 'p6d', label: 'mod 2 tells you:', placeholder: 'what about the number?' },
+                { id: 'p6d', label: 'mod 2 tells you:', placeholder: 'what about the number?', width: '220px' },
               ],
               validate(vals) {
                 return [
@@ -375,11 +375,11 @@ export default {
           inputs: [
             {
               fields: [
-                { id: 'p12a', label: '2,347 is:', placeholder: 'even or odd' },
-                { id: 'p12b', label: '1,000,000 is:', placeholder: 'even or odd' },
-                { id: 'p12c', label: 'odd + odd =', placeholder: 'even or odd' },
-                { id: 'p12d', label: 'even + odd =', placeholder: 'even or odd' },
-                { id: 'p12e', label: 'any \u00d7 even =', placeholder: 'even or odd' },
+                { id: 'p12a', label: '2,347 is:', placeholder: 'even or odd', width: '160px' },
+                { id: 'p12b', label: '1,000,000 is:', placeholder: 'even or odd', width: '160px' },
+                { id: 'p12c', label: 'odd + odd =', placeholder: 'even or odd', width: '160px' },
+                { id: 'p12d', label: 'even + odd =', placeholder: 'even or odd', width: '160px' },
+                { id: 'p12e', label: 'any \u00d7 even =', placeholder: 'even or odd', width: '160px' },
               ],
               validate(vals) {
                 return [

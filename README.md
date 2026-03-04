@@ -8,10 +8,10 @@ Work through interactive lessons and puzzles that build the mathematical foundat
 
 | Module | Topic | Status |
 |--------|-------|--------|
-| 0 | **Where Are You?** — Foundation check across numbers, mod, exponents, binary/hex | Available |
-| 1 | **Modular Arithmetic** — Inverses, primes, and finite fields | Coming soon |
-| 2 | **Groups & Fields** — Algebraic structures for cryptography | Coming soon |
-| 3 | **Elliptic Curves** — Points on curves, ECDSA, Ethereum signatures | Coming soon |
+| 0 | **Where Are You?** — Foundation check across numbers, mod, exponents, binary/hex | ✅ 6 sections, 17 puzzles |
+| 1 | **Modular Arithmetic** — GCD, inverses, Fermat/Euler, prime fields, RSA & DH | ✅ 5 sections, 15 puzzles |
+| 2 | **Groups & Fields** — Group axioms, generators, Lagrange, field classification | ✅ 5 sections, 15 puzzles |
+| 3 | **Elliptic Curves** — Point addition, scalar multiplication, ECDLP, ECDSA | ✅ 5 sections, 15 puzzles |
 
 ## Getting Started
 
@@ -46,11 +46,16 @@ src/
 modules/
   module-00-foundations/
     lesson.md      # Lesson content
-    exercises.js   # 17 puzzles with validation logic
-    visualizers.js # Interactive mod visualizer
+    exercises.js   # Puzzles with validation logic
+    visualizers.js # Interactive visualizer
+  module-01-modular-arithmetic/
+  module-02-groups-fields/
+  module-03-elliptic-curves/
+public/
+  modules/         # Static copies of lesson.md files
 ```
 
-Adding a new module: create a folder under `modules/`, add `lesson.md`, `exercises.js`, and `visualizers.js`, then register it in `src/modules.js`.
+Adding a new module: create a folder under `modules/`, add `lesson.md`, `exercises.js`, and `visualizers.js`, copy `lesson.md` to `public/modules/`, then register it in `src/modules.js`.
 
 ## Tech
 

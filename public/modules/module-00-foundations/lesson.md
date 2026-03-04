@@ -330,7 +330,7 @@ This is the connection — **Solidity's integer arithmetic IS modular arithmetic
 
 ## How Did It Go?
 
-Open the companion web page (`module-00-checker.html`) to check your answers and see where you stand. It'll give you an honest assessment of each section and tell you whether you're ready for Module 1 or if there are spots to shore up first.
+Switch to the **Solve** tab to check your answers and see where you stand. It'll give you an honest assessment of each section and tell you whether you're ready for Module 1 or if there are spots to shore up first.
 
 Don't stress about getting everything right. The point is to know where you are. Some of these problems are intentionally tricky because they test intuition, not memorization.
 

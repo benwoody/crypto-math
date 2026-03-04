@@ -41,7 +41,7 @@ crypto-math/
 
 ### Landing Page (`localhost:5173`)
 - Title: "Crypto Math Workshop"
-- Subtitle: "Built for Thurin. Not a textbook. A workshop."
+- Subtitle: "Not a textbook. A workshop."
 - Grid of module cards showing:
   - Module number and name
   - Brief description

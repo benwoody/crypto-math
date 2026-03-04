@@ -9,6 +9,9 @@ export function renderHome(app) {
         <p>A math workshop for engineers building on Ethereum. Not a textbook. Not a course. A workshop.</p>
       </div>
       <div class="module-grid" id="moduleGrid"></div>
+      <div class="tip-box">
+        <strong>Tip:</strong> This workshop pairs well with an AI. Open a <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> session in this repo and work through the puzzles together — it can walk you through the math, check your reasoning, and explain things differently when you're stuck.
+      </div>
     </div>
   `;
 

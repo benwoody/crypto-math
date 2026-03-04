@@ -501,6 +501,32 @@ header p {
   display: inline-block;
 }
 
+/* Tip box */
+.tip-box {
+  margin-top: 40px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.tip-box strong {
+  color: var(--text);
+}
+
+.tip-box a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.tip-box a:hover {
+  text-decoration: underline;
+}
+
 /* Module page tabs */
 .module-nav {
   display: flex;

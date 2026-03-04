@@ -31,6 +31,10 @@ Each module has two tabs:
 
 Progress saves to localStorage automatically. Section badges show your score: solid (100%), mostly good (60%+), or review (below 60%).
 
+## Pair with an AI
+
+This workshop works well as a conversation. Open a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) session in the repo and work through the puzzles together — the agent can see the lesson content and exercises, walk you through the math step by step, check your reasoning, and explain things differently when you're stuck. It turns a solo worksheet into something closer to office hours.
+
 ## Project Structure
 
 ```

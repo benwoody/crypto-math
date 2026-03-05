@@ -4,8 +4,10 @@ export function renderChecker(container, mod) {
   // Dynamic import for the module's exercises and visualizers
   import(`../modules/${mod.path}/exercises.js`).then(({ default: exerciseData }) => {
     import(`../modules/${mod.path}/visualizers.js`).then(({ mountVisualizers }) => {
+      container.innerHTML = '';
       build(container, exerciseData, mod, mountVisualizers);
     }).catch(() => {
+      container.innerHTML = '';
       build(container, exerciseData, mod, null);
     });
   });

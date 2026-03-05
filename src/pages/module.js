@@ -1,6 +1,7 @@
 import { marked } from 'marked';
 import { modules } from '../modules.js';
 import { renderChecker } from '../checker.js';
+import { saveUI, getUI } from '../progress.js';
 
 export function renderModule(app, moduleId) {
   const mod = modules.find(m => m.id === moduleId);
@@ -33,7 +34,8 @@ export function renderModule(app, moduleId) {
     window.location.hash = '#/';
   });
 
-  let currentTab = 'lesson';
+  const savedModUI = getUI(mod.id);
+  let currentTab = savedModUI.tab || 'lesson';
   let lessonLoaded = false;
   let solveLoaded = false;
 
@@ -41,6 +43,7 @@ export function renderModule(app, moduleId) {
     currentTab = tab;
     tabLesson.classList.toggle('active', tab === 'lesson');
     tabSolve.classList.toggle('active', tab === 'solve');
+    saveUI(mod.id, { ...getUI(mod.id), tab });
 
     if (tab === 'lesson') {
       showLesson();
@@ -88,5 +91,5 @@ export function renderModule(app, moduleId) {
   tabLesson.addEventListener('click', () => setTab('lesson'));
   tabSolve.addEventListener('click', () => setTab('solve'));
 
-  setTab('lesson');
+  setTab(currentTab);
 }

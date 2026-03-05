@@ -1,4 +1,6 @@
 const STORAGE_KEY = 'crypto-math-progress';
+const INPUTS_KEY = 'crypto-math-inputs';
+const UI_KEY = 'crypto-math-ui';
 
 function readStore() {
   try {
@@ -40,4 +42,40 @@ export function clearProgress(moduleId) {
   const store = readStore();
   delete store[moduleId];
   writeStore(store);
+}
+
+// Input value persistence
+export function saveInputs(moduleId, values) {
+  try {
+    const store = JSON.parse(localStorage.getItem(INPUTS_KEY)) || {};
+    store[moduleId] = values;
+    localStorage.setItem(INPUTS_KEY, JSON.stringify(store));
+  } catch {}
+}
+
+export function getInputs(moduleId) {
+  try {
+    const store = JSON.parse(localStorage.getItem(INPUTS_KEY)) || {};
+    return store[moduleId] || {};
+  } catch {
+    return {};
+  }
+}
+
+// UI state persistence (open section, active tab)
+export function saveUI(moduleId, uiState) {
+  try {
+    const store = JSON.parse(localStorage.getItem(UI_KEY)) || {};
+    store[moduleId] = uiState;
+    localStorage.setItem(UI_KEY, JSON.stringify(store));
+  } catch {}
+}
+
+export function getUI(moduleId) {
+  try {
+    const store = JSON.parse(localStorage.getItem(UI_KEY)) || {};
+    return store[moduleId] || {};
+  } catch {
+    return {};
+  }
 }

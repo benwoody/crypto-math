@@ -1,4 +1,4 @@
-import { saveProgress, getProgress } from './progress.js';
+import { saveProgress, getProgress, saveInputs, getInputs, saveUI, getUI } from './progress.js';
 
 export function renderChecker(container, mod) {
   // Dynamic import for the module's exercises and visualizers
@@ -18,8 +18,14 @@ function build(container, data, mod, mountVisualizers) {
     sections: {},
   };
 
-  // Load saved progress
+  // Load saved progress and inputs
   const saved = getProgress(mod.id);
+  const savedInputs = getInputs(mod.id);
+  const savedUI = getUI(mod.id);
+  const openSectionId = savedUI.openSection || data.sections[0]?.id;
+
+  // Collect all input IDs for save-on-type
+  const allFields = [];
 
   // Progress bar
   const progressBar = el('div', 'progress-bar');
@@ -28,8 +34,9 @@ function build(container, data, mod, mountVisualizers) {
   container.appendChild(progressBar);
 
   // Sections
-  data.sections.forEach((section, si) => {
-    const secDiv = el('div', 'section' + (si === 0 ? ' open' : ''));
+  data.sections.forEach((section) => {
+    const isOpen = section.id === openSectionId;
+    const secDiv = el('div', 'section' + (isOpen ? ' open' : ''));
     secDiv.id = section.id;
 
     // Header
@@ -41,7 +48,12 @@ function build(container, data, mod, mountVisualizers) {
     badge.textContent = 'waiting';
     header.appendChild(h2);
     header.appendChild(badge);
-    header.addEventListener('click', () => secDiv.classList.toggle('open'));
+    header.addEventListener('click', () => {
+      // Close all sections, open this one
+      container.querySelectorAll('.section').forEach(s => s.classList.remove('open'));
+      secDiv.classList.add('open');
+      saveUI(mod.id, { openSection: section.id });
+    });
     secDiv.appendChild(header);
 
     // Content
@@ -77,11 +89,13 @@ function build(container, data, mod, mountVisualizers) {
           bonusLabel.textContent = group.bonusLabel || 'Bonus: Find the pattern';
           box.appendChild(bonusLabel);
           group.fields.forEach(field => {
+            allFields.push(field);
             box.appendChild(makeInputRow(field));
           });
           puzzleDiv.appendChild(box);
         } else {
           group.fields.forEach(field => {
+            allFields.push(field);
             puzzleDiv.appendChild(makeInputRow(field));
           });
         }
@@ -131,6 +145,7 @@ function build(container, data, mod, mountVisualizers) {
 
         updateBadge(section.id, secCorrect, secTotal);
         saveProgress(mod.id, section.id, secCorrect, secTotal);
+        saveAllInputs();
         updateProgressBar();
       });
       puzzleDiv.appendChild(btn);
@@ -153,6 +168,32 @@ function build(container, data, mod, mountVisualizers) {
       updateBadge(section.id, s.correct, s.total);
     }
   });
+
+  // Restore saved input values
+  restoreInputs(savedInputs, allFields);
+
+  // Save inputs on every keystroke (debounced)
+  let saveTimer;
+  container.addEventListener('input', () => {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveAllInputs, 500);
+  });
+
+  function saveAllInputs() {
+    const vals = {};
+    allFields.forEach(f => {
+      if (f.type === 'dual') {
+        const q = document.getElementById(f.id + '_q');
+        const r = document.getElementById(f.id + '_r');
+        if (q && q.value) vals[f.id + '_q'] = q.value;
+        if (r && r.value) vals[f.id + '_r'] = r.value;
+      } else {
+        const input = document.getElementById(f.id);
+        if (input && input.value) vals[f.id] = input.value;
+      }
+    });
+    saveInputs(mod.id, vals);
+  }
 
   // Summary section
   const summaryDiv = el('div', 'summary');
@@ -247,6 +288,20 @@ function makeInputRow(field) {
   row.appendChild(fb);
 
   return row;
+}
+
+function restoreInputs(savedInputs, allFields) {
+  allFields.forEach(f => {
+    if (f.type === 'dual') {
+      const q = document.getElementById(f.id + '_q');
+      const r = document.getElementById(f.id + '_r');
+      if (q && savedInputs[f.id + '_q']) q.value = savedInputs[f.id + '_q'];
+      if (r && savedInputs[f.id + '_r']) r.value = savedInputs[f.id + '_r'];
+    } else {
+      const input = document.getElementById(f.id);
+      if (input && savedInputs[f.id]) input.value = savedInputs[f.id];
+    }
+  });
 }
 
 function setFeedback(id, correct, text) {

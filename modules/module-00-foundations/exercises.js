@@ -47,14 +47,14 @@ export default {
           inputs: [
             {
               fields: [
-                { id: 'p2a', label: '2^10 closer to:', placeholder: '1000 or 10000', width: '180px' },
-                { id: 'p2b', label: '2^20 closer to:', placeholder: '100000 or 1000000', width: '200px' },
+                { id: 'p2a', label: '2^10 closer to:', placeholder: '1,000 or 10,000', width: '180px' },
+                { id: 'p2b', label: '2^20 closer to:', placeholder: '100,000 or 1,000,000', width: '200px' },
                 { id: 'p2c', label: '2^256 has ~? digits:', placeholder: '?' },
               ],
               validate(vals) {
                 return [
-                  { correct: vals.p2a.includes('1000') && !vals.p2a.includes('10000'), hint: '1000' },
-                  { correct: vals.p2b.includes('1000000') || vals.p2b.includes('million'), hint: '1,000,000' },
+                  { correct: (vals.p2a.includes('1000') || vals.p2a.includes('1,000')) && !vals.p2a.includes('10000') && !vals.p2a.includes('10,000'), hint: '1,000' },
+                  { correct: vals.p2b.includes('1000000') || vals.p2b.includes('1,000,000') || vals.p2b.includes('million'), hint: '1,000,000' },
                   (() => {
                     const d = num(vals.p2c);
                     return { correct: d >= 75 && d <= 80, hint: '~77' };
@@ -139,7 +139,7 @@ export default {
                 { id: 'p5a', label: '9 + 8 hours =' },
                 { id: 'p5b', label: '3 - 7 hours =' },
                 { id: 'p5c', label: '0 + 25 hours =' },
-                { id: 'p5d', label: '0 + 1000000 hours =' },
+                { id: 'p5d', label: '0 + 1,000,000 hours =' },
               ],
               validate(vals) {
                 return [
@@ -205,9 +205,9 @@ export default {
                 return [
                   { correct: num(vals.p7a) === 27, hint: '27' },
                   { correct: num(vals.p7b) === 125, hint: '125' },
-                  { correct: num(vals.p7c) === 10000, hint: '10000' },
+                  { correct: num(vals.p7c) === 10000, hint: '10,000' },
                   { correct: num(vals.p7d) === 256, hint: '256' },
-                  { correct: num(vals.p7e) === 65536, hint: '65536' },
+                  { correct: num(vals.p7e) === 65536, hint: '65,536' },
                 ];
               },
             },

@@ -589,7 +589,7 @@ export default {
               ],
               validate(vals) {
                 return [
-                  { correct: num(vals.p15g) === 3072, hint: '3072' },
+                  { correct: num(vals.p15g) === 3072, hint: '3,072' },
                   { correct: num(vals.p15h) === 256, hint: '256 — 12× smaller keys!' },
                 ];
               },
